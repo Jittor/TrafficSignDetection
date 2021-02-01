@@ -24,9 +24,6 @@ TrafficSignDetection
 │   └── visualize.py
 ├── evaluate.py
 ├── train.py
-├── run_eval.sh
-├── run_test.sh
-├── run_train.sh
 ├── README.md
 └── requirements.txt
 ```
