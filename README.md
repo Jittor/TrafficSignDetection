@@ -128,8 +128,7 @@ python3 train.py --task=test
 
 #### 模型测试：
 测试集没有Ground Truth。如测试A榜数据，则设置A榜图片的文件路径为数据路径。
-checkpoints链接：
-
+checkpoints链接：[https://cloud.tsinghua.edu.cn/d/0b03f9dedd674101bc94/](https://cloud.tsinghua.edu.cn/d/0b03f9dedd674101bc94/)
 ```shell
 python3 evaluate.py
 ```
