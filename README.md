@@ -86,6 +86,29 @@ python3 dataset/augmentation.py
 
 训练前需要设置数据集的位置，具体设置方式为**train.py**中Line18-22。
 Batch Size,lr,num_workers等等请参考**train.py**中的train函数。
+训练过程的显存消耗如下：
+```shell
+| GeForce RTX 3090 |  23629MiB / 24268MiB |  79%  |
+```
+因为图片尺寸较大，当显存较小时请缩小图片尺寸或者对图片进行裁剪，缩小图片尺寸代码在**dataset/transforms.py**里：
+更改min_size和max_size即可
+```python
+def build_transforms(min_size=2048,
+                     max_size=2048,
+                     flip_horizontal_prob=0.5,
+                     mean=[102.9801, 115.9465, 122.7717],
+                     std = [1.,1.,1.],
+                     to_bgr255=True):
+    
+
+    transform = Compose([
+            Resize(min_size, max_size),
+            RandomHorizontalFlip(flip_horizontal_prob),
+            ToTensor(),
+            Normalize(mean=mean, std=std, to_bgr255=to_bgr255),
+        ])
+    return transform
+```
 设置好后训练脚本如下：
 ```shell
 python3 train.py --task=train
@@ -105,6 +128,8 @@ python3 train.py --task=test
 
 #### 模型测试：
 测试集没有Ground Truth。如测试A榜数据，则设置A榜图片的文件路径为数据路径。
+checkpoints链接：
+
 ```shell
 python3 evaluate.py
 ```
@@ -174,7 +199,7 @@ tensorboard --logdir=runs --bind_all
 4. 使用其他更加有效的检测模型
 5. ....
 
-### Reference
+### 参考
 [1] https://github.com/endernewton/tf-faster-rcnn
 
 [2] https://github.com/chenyuntc/simple-faster-rcnn-pytorch
