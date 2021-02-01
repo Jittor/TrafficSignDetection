@@ -5,6 +5,5 @@ __pycache__/__pycache__
 runs
 tmp
 *.pkl
-*.png
 *.json
 runs*
