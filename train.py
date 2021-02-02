@@ -50,7 +50,7 @@ def test():
                                 is_train=False)
     faster_rcnn = FasterRCNN(n_class=len(CLASSNAMES)+1)
     files = sorted(list(glob.glob(f'{save_checkpoint_path}/checkpoint*.pkl')))
-    f = files[-1:]
+    f = files[-1]
     faster_rcnn.load(f)           
     mAP = eval(val_dataset,faster_rcnn,0,is_display=True,is_save_result=False,score_thresh=0.5)
     print(mAP)
