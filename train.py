@@ -32,7 +32,7 @@ def eval(val_dataset,faster_rcnn,epoch,is_display=False,is_save_result=True,scor
             img_id = img_ids[i]
             results.append((img_id.item(),pred_boxes.numpy(),pred_labels.numpy(),pred_scores.numpy(),gt_boxes.numpy(),gt_labels.numpy()))
             if is_display:
-                save_visualize_image(img_id,pred_boxes.numpy(),pred_scores.numpy(),pred_labels.numpy(),gt_boxes.numpy(),gt_labels.numpy(),CLASSNAMES)
+                save_visualize_image(DATA_DIR,img_id,pred_boxes.numpy(),pred_scores.numpy(),pred_labels.numpy(),gt_boxes.numpy(),gt_labels.numpy(),CLASSNAMES)
     if is_save_result:
         os.makedirs(save_checkpoint_path,exist_ok=True)
         pickle.dump(results,open(f"{save_checkpoint_path}/result_{epoch}.pkl","wb"))

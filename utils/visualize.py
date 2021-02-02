@@ -87,24 +87,23 @@ def visualize_result(img_file,
     return img
 
 
-def save_visualize_image(img_id,pred_boxes,pred_scores,pred_labels,gt_boxes,gt_labels,classnames):
-    img_file =  f'/mnt/disk/lxl/dataset/TTnew/anno/data/{img_id}.jpg'
+def find_dir(data_dir,img_id):
+    t_f = f"{data_dir}/test/{img_id}.jpg"
+    tt_f = f"{data_dir}/train/{img_id}.jpg"
+    o_f = f"{data_dir}/other/{img_id}.jpg"
+    if os.path.exists(tt_f):
+        return tt_f
+    elif os.path.exists(t_f):
+        return t_f
+    elif os.path.exists(o_f):
+        return o_f
+    assert False,f"{img_id}.jpg is not exists"
+
+def save_visualize_image(data_dir,img_id,pred_boxes,pred_scores,pred_labels,gt_boxes,gt_labels,classnames):
+    img_file =  find_dir(data_dir,img_id)
 
     img = visualize_result(img_file,pred_boxes,pred_scores,pred_labels,gt_boxes,gt_labels,classnames)
 
-    if not os.path.exists('test_imgs'):
-        os.makedirs('test_imgs',exist_ok=True)
-
+    os.makedirs('test_imgs',exist_ok=True)
     cv2.imwrite(f'test_imgs/{img_id}.jpg',img)
 
-
-def visualize_image(img_id,boxes,score,label,gt_boxes,gt_label,classnames,scale=(2048.0/800)):
-    filename = f'/mnt/disk/lxl/dataset/tt100k/data/test/{img_id}.jpg'
-    boxes = boxes*scale
-    gt_boxes = gt_boxes*scale
-    img = cv2.imread(filename)
-    img = draw_boxes(img,boxes,label,classnames,score,color=(0,0,255))
-    img = draw_boxes(img,gt_boxes,gt_label,classnames,color=(0,255,0))
-    if not os.path.exists('test_imgs'):
-        os.makedirs('test_imgs',exist_ok=True)
-    cv2.imwrite(f'test_imgs/{img_id}.jpg',img)
