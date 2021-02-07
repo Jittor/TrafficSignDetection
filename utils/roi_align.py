@@ -281,7 +281,7 @@ auto pooled_height = grad_shape2;
 auto pooled_width = grad_shape3;
 
 auto output_size = num_rois * pooled_height * pooled_width * channels;
-memset(grad_input_p,0,grad_input->size);
+cudaMemsetAsync(grad_input_p,0,grad_input->size);
 const int total_count = rois_shape0 * grad_shape2 * grad_shape3 * input_shape1;
 const int thread_per_block = 512;
 const int block_count = (total_count + thread_per_block - 1) / thread_per_block;
