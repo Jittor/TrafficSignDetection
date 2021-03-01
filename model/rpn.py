@@ -398,7 +398,7 @@ class RegionProposalNetwork(nn.Module):
             init.gauss_(var.weight,0,0.01)
             init.constant_(var.bias,0.0)
 
-    def execute(self, x, img_size):
+    def execute(self, x, img_size,scale=1.0):
         """Forward Region Proposal Network.
 
         Here are notations.
@@ -457,7 +457,7 @@ class RegionProposalNetwork(nn.Module):
                                     rpn_fg_scores[i],
                                     anchor, 
                                     img_size,
-                                    1.0/self.feat_stride)
+                                    scale)
             batch_index = i * jt.ones((len(roi),), dtype='int32')
             rois.append(roi)
             roi_indices.append(batch_index)
