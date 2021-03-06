@@ -384,7 +384,7 @@ class RegionProposalNetwork(nn.Module):
                                               n_train_pre_nms=n_train_pre_nms,
                                               n_train_post_nms=n_train_post_nms,
                                               n_test_pre_nms=n_test_pre_nms,
-                                              n_test_post_nms=n_test_pre_nms,
+                                              n_test_post_nms=n_test_post_nms,
                                               min_size=min_size)
         n_anchor = self.anchor_base.shape[0]
         self.conv1 = nn.Conv(in_channels, mid_channels, 3, 1, 1)
